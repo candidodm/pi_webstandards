@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Syne:wght@400;700;800&display=swap');
+
+/* ── RESET ────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #f5f1ea;
+  --bg-dark: #141210;
+  --warm:    #ece6db;
+  --ink:     #141210;
+  --mid:     #6e6860;
+  --faint:   #a9a39a;
+  --line:    #d9d3c9;
+  --orange:  #c94f28;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ── ANIMAÇÕES ─────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes growX {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ── TOPO ──────────────────────────────────────────── */
+.faixa.topo {
+  background: var(--bg-dark);
+  color: var(--bg);
+  padding: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  border-bottom: none;
+}
+
+/* grade sutil de fundo */
+.topo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+/* brilho atmosférico no canto */
+.topo::after {
+  content: '';
+  position: absolute;
+  top: -180px; right: -180px;
+  width: 640px; height: 640px;
+  background: radial-gradient(circle, rgba(201,79,40,.2) 0%, transparent 65%);
+  pointer-events: none;
+  animation: fadeIn 2s ease both;
+}
+
+.topo h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(56px, 9.5vw, 128px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  padding: 0 64px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 1s cubic-bezier(.16,1,.3,1) .1s both;
+}
+
+/* "Turismo Hard Core" em itálico laranja na segunda linha */
+.topo h1::first-line {
+  font-style: normal;
+}
+
+.topo h1 em {
+  font-style: italic;
+  color: var(--orange);
+  display: block;
+}
+
+/* sublinhado laranja animado */
+.topo h1::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 56px;
+  background: var(--orange);
+  margin-top: 32px;
+  transform-origin: left;
+  animation: growX 0.7s cubic-bezier(.16,1,.3,1) 1s both;
+}
+
+.slogan {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  padding: 28px 64px 0;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 1s cubic-bezier(.16,1,.3,1) .3s both;
+}
+
+.mini {
+  font-size: 14px;
+  color: var(--faint);
+  padding: 14px 64px 72px;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 1s cubic-bezier(.16,1,.3,1) .45s both;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* ── FAIXA GENÉRICA ────────────────────────────────── */
+.faixa {
+  padding: 88px 64px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ── H2 ────────────────────────────────────────────── */
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  margin-top: 0;
+  letter-spacing: -0.01em;
+}
+
+/* eyebrow acima de cada h2 */
+h2::before {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+
+/* atribui o texto de cada eyebrow */
+.faixa:nth-child(2) h2::before  { content: 'Sobre'; }
+.faixa:nth-child(3) h2::before  { content: 'Serviços'; }
+.faixa:nth-child(4) h2::before  { content: 'Vantagens'; }
+.faixa:nth-child(5) h2::before  { content: 'Contato'; }
+.faixa.topo h2::before, .rodape h2::before { content: none; }
+
+/* ── TEXTO CORRIDO ─────────────────────────────────── */
+.faixa > p {
+  font-size: 15px;
+  color: var(--mid);
+  max-width: 580px;
+  line-height: 1.85;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+.faixa > p.mini {
+  font-size: 13px;
+  color: var(--faint);
+  margin-top: 6px;
+}
+
+/* ── CLARA ─────────────────────────────────────────── */
+.clara { background: var(--warm); }
+
+/* ── LINHA + CAIXA ─────────────────────────────────── */
+.linha {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  border: 1px solid var(--line);
+}
+
+.caixa {
+  flex: 1;
+  min-width: 210px;
+  padding: 36px 28px 48px;
+  background: #fff;
+  border-right: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s, transform 0.3s cubic-bezier(.16,1,.3,1);
+}
+.caixa:last-child { border-right: none; }
+.clara .caixa { background: #faf7f2; }
+
+/* linha laranja no topo no hover */
+.caixa::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(.16,1,.3,1);
+}
+.caixa:hover::before { transform: scaleX(1); }
+.caixa:hover { transform: translateY(-4px); background: #fff; }
+.clara .caixa:hover { background: #fff; }
+
+/* número decorativo no canto */
+.linha .caixa:nth-child(1) > .num::before { content: '01'; }
+.linha .caixa:nth-child(2) > .num::before { content: '02'; }
+.linha .caixa:nth-child(3) > .num::before { content: '03'; }
+
+/* como o HTML não tem .num, uso pseudo via nth-child em ::after */
+.linha .caixa:nth-child(1)::after { content: '01'; }
+.linha .caixa:nth-child(2)::after { content: '02'; }
+.linha .caixa:nth-child(3)::after { content: '03'; }
+.caixa::after {
+  position: absolute;
+  bottom: 16px; right: 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--line);
+  line-height: 1;
+  pointer-events: none;
+  transition: color 0.25s;
+}
+.caixa:hover::after { color: #ddd4c8; }
+
+.caixa h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.caixa p {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+/* ── FORMULÁRIO ────────────────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 520px;
+  margin-top: 32px;
+}
+
+.form label {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-top: 28px;
+  margin-bottom: 6px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 11px 0;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.25s;
+  line-height: 1.5;
+}
+input:focus, textarea:focus { border-bottom-color: var(--ink); }
+input::placeholder, textarea::placeholder { color: var(--faint); }
+textarea { resize: vertical; min-height: 88px; }
+
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding: 14px 32px;
+  border: none;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s;
+}
+button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--orange);
+  transform: translateX(-101%);
+  transition: transform 0.35s cubic-bezier(.16,1,.3,1);
+}
+button:hover::before { transform: translateX(0); }
+button .label { position: relative; z-index: 1; }
+button::after {
+  content: '→';
+  position: relative;
+  z-index: 1;
+  font-size: 16px;
+  transition: transform 0.25s;
+}
+button:hover::after { transform: translateX(5px); }
+
+/* ── RODAPÉ ────────────────────────────────────────── */
+.faixa.rodape {
+  background: var(--bg-dark);
+  color: var(--faint);
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.07em;
+  padding: 32px 64px;
+  border-bottom: none;
+}
+
+/* ── RESPONSIVO ────────────────────────────────────── */
+@media (max-width: 680px) {
+  .faixa        { padding: 60px 24px; }
+  .faixa.topo   { min-height: 100svh; }
+  .topo h1      { padding: 0 24px; font-size: clamp(52px, 13vw, 80px); }
+  .slogan       { padding: 24px 24px 0; }
+  .mini         { padding: 12px 24px 60px; }
+  .faixa.rodape { padding: 28px 24px; }
+  .linha        { flex-direction: column; }
+  .caixa        { border-right: none; border-bottom: 1px solid var(--line); }
+  .caixa:last-child { border-bottom: none; }
+}
